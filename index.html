@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fruit and Veggies</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.11/angular.min.js"></script>
+  <script src="js/fruit_and_veggies.js"></script>
+  <script src="js/app.js"></script>
+  <link href='http://fonts.googleapis.com/css?family=Salsa' rel='stylesheet' type='text/css'>
+</head>
+
+<body ng-app="SortingGame" class="radial-gradient">
+  <div class="container" ng-controller="game">
+    <h1 class="text-center salsa">Fruit or Veggie?</h1>
+    <p class="text-center">Use the arrow buttons to sort the produce items into the correct columns.</p>
+    <hr>
+    <div class="row">
+
+      <!-- Col 1: Fruit -->
+      <div class="col-xs-4">
+        <h2 class="text-center salsa">Fruits</h2>
+        <table class="table">
+          <tr ng-repeat="fruit in sortedFruit track by $index">
+            <td class="text-center" ng-class="{'danger':(items.length == 0  && !isFruit($index))}">
+              {{fruit}}
+            </td>
+            <td>
+              <button class="btn btn-danger" ng-click="undoSort($index, 'Fruit')">
+                <span class="glyphicon glyphicon-remove"></span>
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Col 2: Unsorted -->
+      <div class="col-xs-4">
+        <h2 class="text-center">&nbsp;</h2>
+        <table class="table">
+          <tr ng-repeat="item in items track by $index">
+            <td>
+              <button class="btn btn-warning" ng-click="sortFruit($index)">
+                <span class="glyphicon glyphicon-arrow-left"></span>
+              </button>
+            </td>
+            <td class="text-center">
+              {{item}}
+            </td>
+            <td>
+              <button class="btn btn-success" ng-click="sortVeg($index)">
+                <span class="glyphicon glyphicon-arrow-right"></span>
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Col 3: Veggie -->
+      <div class="col-xs-4">
+        <h2 class="text-center salsa">Veggies</h2>
+        <table class="table">
+          <tr ng-repeat="veg in sortedVeg track by $index">
+            <td class="text-center" ng-class="{'danger':(items.length == 0  && !isVeg($index))}">
+              {{veg}}
+            </td>
+            <td>
+              <button class="btn btn-danger" ng-click="undoSort($index, 'Veg')">
+                <span class="glyphicon glyphicon-remove"></span>
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
